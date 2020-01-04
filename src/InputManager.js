@@ -5,7 +5,7 @@ class InputManager {
     this.observers.push(fn);
   }
   unsubscribe(fn){
-    this.observers = this.observer.filter(subscriber => subscriber !== fn);
+    this.observers = this.observers.filter(subscriber => subscriber !== fn);
   }
 
   broadcast(action, data){
