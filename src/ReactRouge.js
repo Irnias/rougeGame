@@ -1,18 +1,21 @@
 import React, {useRef, useEffect, useState } from 'react';
 import InputManager from './InputManager';
+import Player from './Player';
+import World from './World';
 
 const ReactRouge = ({width, height, tilesize}) => {
   //hook canvasef
   const canvasRef = useRef();
 
-  const [player, setPlayer] = useState({x:64,y:128});
+  const [player, setPlayer] = useState(new Player(1,2,tilesize));
+  const [world, setWorld] = useState( new World(width,height,tilesize));
 
   let inputManager = new InputManager();
   const handleInput = (action,data) => {
     console.log(`handle input: ${action}: ${JSON.stringify(data)}`);
-    let newPlayer = {...player};
-    newPlayer.x += data.x * tilesize;
-    newPlayer.y += data.y * tilesize;
+    let newPlayer = new Player();
+    Object.assign(newPlayer, player);
+    newPlayer.move(data.x, data.y);
     setPlayer(newPlayer);
   }
   //hook para loguear cada input de teclado
@@ -30,8 +33,8 @@ const ReactRouge = ({width, height, tilesize}) => {
     console.log("Draw to canvas");
     const ctx = canvasRef.current.getContext('2d');
     ctx.clearRect(0,0,width*tilesize,height*tilesize);
-    ctx.fillStyle='#000';
-    ctx.fillRect(player.x,player.y,16,16);
+    world.draw(ctx);
+    player.draw(ctx);
   });
 
   return (
