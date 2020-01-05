@@ -28,6 +28,7 @@ const ReactRouge = ({width, height, tilesize}) => {
     let spawner = new Spawner(newWorld);
     spawner.spawnLoot(10);
     spawner.spawnMonster(6);
+    spawner.spawnStairs();
     setWorld(newWorld);
     // eslint-disable-next-line
   },[]);
