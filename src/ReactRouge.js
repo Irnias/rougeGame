@@ -51,15 +51,20 @@ const ReactRouge = ({width, height, tilesize}) => {
   });
 
   return (
-    <canvas 
-      ref={canvasRef}
-      width={width * tilesize}
-      height={height * tilesize} 
-      style={{ 
-        border: '1px solid black',
-        background: 'grey'
-      }}
-    ></canvas>
+    <>
+      <canvas 
+        ref={canvasRef}
+        width={width * tilesize}
+        height={height * tilesize} 
+        style={{ 
+          border: '1px solid black',
+          background: 'grey'
+        }}
+      ></canvas>
+      <ul>
+        {world.player.inventory.map((item,index) => (<li key={index}>{item.attributes.name}</li>))}
+      </ul>
+    </>
   );
 };
 export default ReactRouge;
