@@ -7,10 +7,11 @@ class Player extends Entity {
   attributes = {
     name: 'Player',
     ascii: '@',
-    helath: 10
+    health: 10
   }
 
   move(dx,dy){
+    if(this.attributes.health <= 0) return;
     this.x += dx;
     this.y += dy;
   }
@@ -18,7 +19,7 @@ class Player extends Entity {
   add(item){
     this.inventory.push(item);
   }
-  
+
   copyPlayer(){
     let newPlayer = new Player();
     Object.assign(newPlayer, this);
